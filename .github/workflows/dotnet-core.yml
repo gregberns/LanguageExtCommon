@@ -2,7 +2,8 @@ name: .NET Core
 
 on:
   # Not sure we need to build on each push - just on pull_requests
-  # push:
+  push:
+    branches: [ main ]
   pull_request:
   release:
     types:
@@ -65,6 +66,8 @@ jobs:
           do
             curl -vX PUT -u "$GITHUB_USER:$GITHUB_TOKEN" -F package=@$f $GITHUB_FEED
           done
+
+# No destination repository detected. Ensure the source project has a 'RepositoryUrl' property defined.
 
   release:
     needs: build
