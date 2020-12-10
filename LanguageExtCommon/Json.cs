@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using LanguageExt;
 using LanguageExt.Common;
 using static LanguageExt.Prelude;
 using Newtonsoft.Json;
 
-namespace LanguageExt.Common
+namespace LanguageExtCommon
 {
     public static class Json
     {
@@ -26,7 +25,6 @@ namespace LanguageExt.Common
                     {
                         return Left<Error, T>(Error.New(e));
                     }
-
                 }
             }
             catch (Exception e)

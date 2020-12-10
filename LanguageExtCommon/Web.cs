@@ -4,26 +4,21 @@ using LanguageExt;
 using LanguageExt.Common;
 using static LanguageExt.Prelude;
 
-
-namespace LanguageExt.Common
+namespace LanguageExtCommon
 {
     public static class Web
     {
-        public static string UrlEncode(Dictionary<string, string> dict)
-        {
-            return String.Join(
+        public static string UrlEncode(Dictionary<string, string> dict) =>
+            String.Join(
                 "&",
                 dict.Map(y => $"{y.Key}={System.Net.WebUtility.UrlEncode(y.Value)}")
             );
-        }
 
-        public static string UrlEncode(Map<string, string> dict)
-        {
-            return String.Join(
+        public static string UrlEncode(Map<string, string> dict) =>
+             String.Join(
                 "&",
                 dict.Map(y => $"{y.Key}={System.Net.WebUtility.UrlEncode(y.Value)}")
             );
-        }
 
         public static Validation<string, Uri> ToUri(string str)
         {

@@ -6,11 +6,10 @@ using static LanguageExt.Prelude;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace LanguageExt.Common
+namespace LanguageExtCommon
 {
     public static class Yaml
     {
-
         public static Either<Error, T> ParseYamlFile<T>(string path) =>
             Try(() => System.IO.File.ReadAllText(path))
                 .ToEither()
@@ -30,6 +29,5 @@ namespace LanguageExt.Common
                 .Build()
                 .Serialize(obj)
             ).ToEither();
-
     }
 }

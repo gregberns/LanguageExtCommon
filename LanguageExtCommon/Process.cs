@@ -1,11 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using LanguageExt;
 using LanguageExt.Common;
 using static LanguageExt.Prelude;
 
-namespace LanguageExt.Common
+namespace LanguageExtCommon
 {
     public static class Process
     {

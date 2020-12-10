@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using LanguageExt;
 using LanguageExt.Common;
 using static LanguageExt.Prelude;
-using Newtonsoft.Json;
 
-namespace LanguageExt.Common
+namespace LanguageExtCommon
 {
     public static class Environment
     {
@@ -17,7 +14,6 @@ namespace LanguageExt.Common
                 ? Fail<string, string>($"Invalid environmental variable: {env}")
                 : Success<string, string>(val);
         }
-
         static Validation<string, int> GetEnvInt(string env) =>
             GetEnv(env).Bind<int>(
                 i => parseInt(i)

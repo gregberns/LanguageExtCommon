@@ -1,4 +1,4 @@
-# LanguageExt.Common
+# LanguageExtCommon
 
 ## Purpose
 
@@ -14,4 +14,4 @@ Wrap commonly used .NET functionality to be compatible with the [LanguageExt](ht
 
 ## Contribution
 
-This project is very new and needs lots of love. PRs are very welcome. Feedback is very welcome.
+This project is very new and needs lots of love. Feedback and PRs are very welcome.
