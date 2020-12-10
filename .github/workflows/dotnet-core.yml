@@ -1,7 +1,9 @@
+# Pipeline was created with all the help from:
+# https://dusted.codes/github-actions-for-dotnet-core-nuget-packages#create-build-artifacts
+
 name: .NET Core
 
 on:
-  # Not sure we need to build on each push - just on pull_requests
   push:
     branches: [ main ]
   pull_request:
@@ -41,7 +43,6 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Pack
-        # if: matrix.os == 'ubuntu-latest'
       run: |
         dotnet pack -v normal -c Release --no-restore --include-symbols --include-source -p:PackageVersion=$GITHUB_RUN_ID $PROJECT_NAME/$PROJECT_NAME.*proj
     - name: Upload Artifact
@@ -67,8 +68,6 @@ jobs:
             curl -vX PUT -u "$GITHUB_USER:$GITHUB_TOKEN" -F package=@$f $GITHUB_FEED
           done
 
-# No destination repository detected. Ensure the source project has a 'RepositoryUrl' property defined.
-
   release:
     needs: build
     if: github.event_name == 'release'
@@ -79,7 +78,6 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.301
-
       - name: Create Release NuGet package
         run: |
           arrTag=(${GITHUB_REF//\// })
@@ -96,5 +94,5 @@ jobs:
             curl -vX PUT -u "$GITHUB_USER:$GITHUB_TOKEN" -F package=@$f $GITHUB_FEED
           done
 
-      # - name: Push to NuGet Feed
-      #   run: dotnet nuget push ./nupkg/*.nupkg --source $NUGET_FEED --skip-duplicate --api-key $NUGET_KEY
+      - name: Push to NuGet Feed
+        run: dotnet nuget push ./nupkg/*.nupkg --source $NUGET_FEED --skip-duplicate --api-key $NUGET_KEY
