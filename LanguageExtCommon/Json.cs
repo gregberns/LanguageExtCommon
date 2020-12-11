@@ -33,6 +33,29 @@ namespace LanguageExtCommon
             }
         }
 
+        public static Either<Error, T> Deserialize<T>(Stream stream)
+        {
+            try
+            {
+                using (var sr = new StreamReader(stream))
+                using (var jsonTextReader = new JsonTextReader(sr))
+                {
+                    try
+                    {
+                        return JsonSerializer.Create().Deserialize<T>(jsonTextReader);
+                    }
+                    catch (Exception e)
+                    {
+                        return Left<Error, T>(Error.New(e));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                return Left<Error, T>(Error.New(e));
+            }
+        }
+
         public static Either<Error, T> Deserialize<T>(string str)
         {
             try
