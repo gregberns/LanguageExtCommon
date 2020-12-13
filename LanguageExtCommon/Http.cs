@@ -10,8 +10,14 @@ using static LanguageExt.Prelude;
 
 namespace LanguageExtCommon
 {
+    /// <summary>
+    /// Provides wrappers around `System.Net.Http`
+    /// </summary>
     public static class Http
     {
+        /// <summary>
+        /// Create a new HttpClient
+        /// </summary>
         public static HttpClient GetHttpClient(Uri serviceEndpoint)
         {
             var client = new HttpClient();
@@ -21,6 +27,9 @@ namespace LanguageExtCommon
             return client;
         }
 
+        /// <summary>
+        /// Make GET request
+        /// </summary>
         public static async Task<Either<Error, HttpResponse>> HttpGet(HttpClient client, string requestUri)
         {
             HttpResponseMessage response = null;
@@ -35,6 +44,9 @@ namespace LanguageExtCommon
             return await ProcessHttpResponse(response);
         }
 
+        /// <summary>
+        /// Make POST request
+        /// </summary>
         public static async Task<Either<Error, HttpResponse>> HttpPost(HttpClient client, string requestUri, HttpContent body)
         {
             HttpResponseMessage response = null;
@@ -72,18 +84,29 @@ namespace LanguageExtCommon
             }
         }
 
-        public static HttpContent CreateJsonRequest<T>(T obj)
-        {
-            var json = JsonConvert.SerializeObject(obj);
-            var body = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            return body;
-        }
+        /// <summary>
+        /// Serialize object to JSON, to be passed into an HttpClient
+        /// </summary>
+        public static HttpContent CreateJsonRequest<T>(T obj) =>
+            new StringContent(JsonConvert.SerializeObject(obj), System.Text.Encoding.UTF8, "application/json");
     }
 
+    /// <summary>
+    /// Object containing data returned from Http Response
+    /// </summary>
     public struct HttpResponse
     {
+        /// <summary>
+        /// Status Code of the Http Response
+        /// </summary>
         public int StatusCode;
+        /// <summary>
+        /// Headers from Http Response
+        /// </summary>
         public Map<string, Lst<string>> Headers;
+        /// <summary>
+        /// Body from Http Response
+        /// </summary>
         public string Body;
     }
 

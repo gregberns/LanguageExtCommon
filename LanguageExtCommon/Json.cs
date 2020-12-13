@@ -9,6 +9,12 @@ namespace LanguageExtCommon
 {
     public static class Json
     {
+        public static string Serialize<T>(T obj) =>
+            JsonConvert.SerializeObject(obj);
+
+        public static string SerializeFormatted<T>(T obj) =>
+            JsonConvert.SerializeObject(obj, Formatting.Indented);
+
         public static Either<Error, T> Deserialize<T>(Byte[] data)
         {
             try
@@ -67,10 +73,5 @@ namespace LanguageExtCommon
                 return Left<Error, T>(Error.New(e));
             }
         }
-    }
-
-    public static class JsonExt
-    {
-        public static Either<Error, T> DeserializeJson<T>(this string str) => Json.Deserialize<T>(str);
     }
 }
