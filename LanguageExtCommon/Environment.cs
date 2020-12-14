@@ -32,6 +32,16 @@ namespace LanguageExtCommon
             );
 
         /// <summary>
+        /// Get Environment Variable of type boolean
+        /// </summary>
+        public static Validation<string, bool> GetEnvBool(string env) =>
+            GetEnv(env).Bind<bool>(
+                b => parseBool(b)
+                    .ToEither($"Invalid environmental boolean: {env} => {b}")
+                    .ToValidation()
+            );
+
+        /// <summary>
         /// Get Environment Variable of type Uri (System.UriKind.RelativeOrAbsolute)
         /// </summary>
         public static Validation<string, Uri> GetEnvUri(string env) =>
