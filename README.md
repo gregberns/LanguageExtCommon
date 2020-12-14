@@ -11,6 +11,8 @@ Wrap commonly used .NET functionality to be compatible with the [LanguageExt](ht
 * Json - Deserialize Json data.
 * Yaml - Deserialize Yaml data.
 * Process - Run OS processes
+* Http - wrappers around `System.Net.Http.HttpClient`
+* Paging - General implementation to handle paging through data sets. Example: REST APIs.
 
 ## Contribution
 

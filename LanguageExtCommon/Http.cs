@@ -30,7 +30,13 @@ namespace LanguageExtCommon
         /// <summary>
         /// Make GET request
         /// </summary>
-        public static async Task<Either<Error, HttpResponse>> HttpGet(HttpClient client, string requestUri)
+        public static EitherAsync<Error, HttpResponse> HttpGet(HttpClient client, string requestUri) =>
+            HttpGetAsync(client, requestUri).ToAsync();
+
+        /// <summary>
+        /// Make GET request
+        /// </summary>
+        public static async Task<Either<Error, HttpResponse>> HttpGetAsync(HttpClient client, string requestUri)
         {
             HttpResponseMessage response = null;
             try
@@ -47,7 +53,13 @@ namespace LanguageExtCommon
         /// <summary>
         /// Make POST request
         /// </summary>
-        public static async Task<Either<Error, HttpResponse>> HttpPost(HttpClient client, string requestUri, HttpContent body)
+        public static EitherAsync<Error, HttpResponse> HttpPost(HttpClient client, string requestUri, HttpContent body) =>
+            HttpPostAsync(client, requestUri, body).ToAsync();
+
+        /// <summary>
+        /// Make POST request
+        /// </summary>
+        public static async Task<Either<Error, HttpResponse>> HttpPostAsync(HttpClient client, string requestUri, HttpContent body)
         {
             HttpResponseMessage response = null;
             try
